@@ -1,0 +1,8 @@
+{
+  "id" : ${Id},
+  "number": ${number},
+  "airline": "${airline}",
+  "departure_time": "${departure_time}",
+  "arrival_time": "${arrival_time}",
+  "price": "${price}"
+}
