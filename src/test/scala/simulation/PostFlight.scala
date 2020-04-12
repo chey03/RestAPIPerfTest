@@ -11,7 +11,8 @@ import scala.concurrent.duration._
 
 class PostFlight extends Simulation{
 
-  val httpConf = http.baseUrl("http://localhost:8080/")
+  //val httpConf = http.baseUrl("http://localhost:8080/")
+  val httpConf = http.baseUrl("http://192.168.56.1:8088/")
     .header("Accept", "application/json")
 
   var id = (101 to 100000).iterator
@@ -34,11 +35,11 @@ class PostFlight extends Simulation{
 
   val customFeeder = Iterator.continually(Map(
     "Id" -> id.next(),
-    "number" -> rnd.nextInt(1000),
+    "number" -> rnd.nextInt(1000000),
     "airline" -> ("TestAirline-" + randomString(5)),
     "departure_time" -> ( hr+ ":" + mm + ":" + ss) ,
     "arrival_time" -> ( hr+ ":" + mm + ":" + ss) ,
-    "price" -> ("$" + rnd.nextFloat())
+    "price" -> ("$" + rnd.nextInt(1000))
   ))
 
   def postNewFlight() = {
@@ -48,7 +49,7 @@ class PostFlight extends Simulation{
           .post("flight/")
           .body(ElFileBody("bodies/postbody.json")).asJson
           .check(status.is(200)))
-        .pause(1)
+        .pause(0)
     }
   }
 
@@ -62,6 +63,6 @@ class PostFlight extends Simulation{
       constantConcurrentUsers(10) during (60 seconds), // 1
       rampConcurrentUsers(10) to (20) during (60 seconds)) // 2)
     .protocols(httpConf)
-  ).maxDuration(2 minute)
+  ).maxDuration(60 seconds)
 
 }

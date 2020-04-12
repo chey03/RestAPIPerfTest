@@ -11,7 +11,7 @@ class Getflight extends Simulation {
 
   //1 Conf details
 
-  val base = http.baseUrl(  "http://localhost:8080")
+  val base = http.baseUrl(  "http://192.168.56.1:8088/")
     .header("Accept", "application/json")
 
   // 2 Scenario Definition

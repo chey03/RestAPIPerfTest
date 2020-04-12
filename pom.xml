@@ -45,8 +45,12 @@
       <plugin>
         <groupId>io.gatling</groupId>
         <artifactId>gatling-maven-plugin</artifactId>
+        <configuration>
+          <simulationClass>simulation.PostFlight</simulationClass>
+        </configuration>
         <version>${gatling-maven-plugin.version}</version>
       </plugin>
+
       
     </plugins>
   </build>
